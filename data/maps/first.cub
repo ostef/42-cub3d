@@ -1,7 +1,7 @@
-NO ./data/textures/wall.xpm
-SO ./data/textures/wall.xpm
-WE ./data/textures/wall.xpm
-EA ./data/textures/wall.xpm
+NO ./data/textures/north.xpm
+SO ./data/textures/south.xpm
+WE ./data/textures/west.xpm
+EA ./data/textures/east.xpm
 F 220,100,0
 C 255,30,0
 
