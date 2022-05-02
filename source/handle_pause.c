@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   handle_pause.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/29 16:16:45 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/02 17:39:54 by ljourand         ###   ########lyon.fr   */
+/*   Created: 2022/05/02 15:45:39 by ljourand          #+#    #+#             */
+/*   Updated: 2022/05/02 17:45:00 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-t_int	main(t_int argc, t_str *args)
+void	start_game(t_game *game)
 {
-	t_int	i;
-	t_game	game;
+	printf("start game\n");
+	game->mouse_enabled = FALSE;
+	mlx_mouse_hide();
+}
 
-	ft_println ("Hello Sailor!");
-	i = 0;
-	while (i < argc)
-	{
-		ft_println (args[i]);
-		i += 1;
-	}
-	init_game(&game);
+void	stop_game(t_game *game)
+{
+	printf("stop game\n");
+	game->mouse_enabled = FALSE;
+	mlx_mouse_show();
 }
