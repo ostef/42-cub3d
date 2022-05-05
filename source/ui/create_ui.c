@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_pause.c                                     :+:      :+:    :+:   */
+/*   create_ui.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 15:45:39 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/05 16:49:04 by ljourand         ###   ########lyon.fr   */
+/*   Created: 2022/05/05 16:52:20 by ljourand          #+#    #+#             */
+/*   Updated: 2022/05/05 16:57:18 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	start_game(t_game *game)
+typedef struct	s_ui
 {
-	printf("start game\n");
-	game->mouse_enabled = FALSE;
-	mlx_mouse_hide();
+	t_uint	width;
+	t_uint	height;
+	t_uint	top;
+	t_uint	left;
+	t_str	str;
+	t_rgba	bg_color;
+	t_rgba	color;
+}	t_ui;
+
+void	create_ui(t_uint width, t_uint height, t_uint top, t_uint left, t_str str)
+{
+	
 }
 
-void	stop_game(t_game *game)
+
+void	draw_ui(t_game *game, t_ui ui)
 {
-	printf("stop game\n");
-	game->mouse_enabled = TRUE;
-	mlx_mouse_show();
+	
 }

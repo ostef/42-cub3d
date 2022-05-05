@@ -6,7 +6,7 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:02:29 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/02 17:45:23 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 16:58:03 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ int	tick(void *params)
 	t_game *game;
 
 	game = (t_game *)params;
-	game->params.mouse_coord.x = 0;
-	game->params.mouse_coord.y = 0;
+	if (!game->mouse_enabled)
+	{
+		game->params.mouse_coord.x = 0;
+		game->params.mouse_coord.y = 0;
+		mlx_mouse_move(game->mlx.window, 0, 0);
+	}
 	return (0);
 }
 
@@ -45,7 +49,7 @@ void	init_game(t_game *game)
 	game->mlx.window = mlx_new_window(game->mlx.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cube3d");
 	mlx_hook(game->mlx.window, MOUSE_PRESS, 0L, mouse_press, &game->params.inputs);
 	mlx_hook(game->mlx.window, MOUSE_RELEASE, 0L, mouse_release, &game->params.inputs);
-	mlx_hook(game->mlx.window, MOUSE_MOVE, 0L, mouse_move, &game->params.mouse_coord);
+	mlx_hook(game->mlx.window, MOUSE_MOVE, 0L, mouse_move, &game);
 	mlx_hook(game->mlx.window, KEY_PRESS, 0L, keydown, &game->params.inputs);
 	mlx_hook(game->mlx.window, KEY_RELEASE, 0L, keyup, &game->params.inputs);
 	mlx_hook(game->mlx.window, DESTROY_NOTIFY, 0L, destroy, NULL);

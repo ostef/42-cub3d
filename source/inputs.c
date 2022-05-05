@@ -6,7 +6,7 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:43:57 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/02 17:48:22 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 16:49:42 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	keydown(int keycode, void *game)
 {
 	t_game	*gam;
 
-	printf("keycode: %d\n", keycode);
+	// printf("keycode: %d\n", keycode);
 	gam = (t_game *)game;
 	if (keycode == KEY_Q)
 		stop_game(game);
@@ -47,7 +47,7 @@ int	mouse_press(int keycode, int x, int y, void *in)
 {
 	t_bool	*inputs;
 
-	printf("keycode mouse: %d\n", keycode + 500);
+	// printf("keycode mouse: %d\n", keycode + 500);
 	inputs = (t_bool *)in;
 	inputs[keycode + 500] = TRUE;
 	return (0);
@@ -66,14 +66,22 @@ int	mouse_release(int keycode, int x, int y, void *in)
 	(void)y;
 }
 
-int	mouse_move(int x, int y, void *mouse_coord)
+int	mouse_move(int x, int y, void *g)
 {
-	t_coord	*coord;
+	t_game	*game;
 
-	coord = (t_coord *)mouse_coord;
-	printf("mouse move: x: %d, y: %d\n", x, y);
-	coord->x += x;
-	coord->y += y;
+	game = (t_game *)g;
+	// printf("mouse move: x: %d, y: %d\n", x, y);
+	if (game->mouse_enabled)
+	{
+		game->params.mouse_coord.x = x;
+		game->params.mouse_coord.y = y;
+	}
+	else
+	{
+		game->params.mouse_coord.x += x;
+		game->params.mouse_coord.y += y;
+	}
 	return (0);
 	(void)x;
 	(void)y;
