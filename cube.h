@@ -6,7 +6,7 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/03 16:19:52 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 17:37:57 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,10 +192,17 @@ typedef struct	s_game
 	t_vec2f	cam_dir;
 }				t_game;
 
+typedef struct s_raycaster
+{
+	
+}	t_raycaster;
+
 void	init_game(t_game *game);
 void	start_game(t_game *game);
 void	stop_game(t_game *game);
 int		tick(void *params);
+void	update(t_game *game);
+void	render(t_game *game);
 
 int		keydown(int keycode, void *in);
 int		keyup(int keycode, void *in);
@@ -208,12 +215,15 @@ t_bool	parse_map(t_map *map, t_cstr filename);
 
 /* Image */
 
-void	init_image(t_game *game, t_image *img, int width, int height);
+t_bool	init_image(t_game *game, t_image *img, int width, int height);
+void	destroy_image(t_game *game, t_image *img);
+void	clear_image(t_image *img, t_rgba col);
 void	set_px(t_image *img, int x, int y, t_rgba color);
 t_rgba	get_px(t_image *img, int x, int y);
 
 /* Math */
 
+t_rgba	rgba(t_u8 r, t_u8 g, t_u8 b, t_u8 a);
 t_u32	rgba_to_trgb(t_rgba x);
 t_rgba	trgb_to_rgba(t_u32 x);
 
