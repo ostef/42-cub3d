@@ -2,7 +2,10 @@ NAME = cube
 INCLUDE_DIRS = . libft mlx
 INCLUDE_FILES = cube.h
 SRC_DIR = source
-SRC_FILES = main.c window.c inputs.c handle_pause.c parse/parse.c parse/utils.c parse/textures.c parse/colors.c parse/description.c
+SRC_FILES = main.c window.c inputs.c handle_pause.c image.c\
+	math/rgba.c\
+	parse/parse.c parse/utils.c parse/textures.c parse/colors.c parse/description.c
+
 SRCS = $(addprefix $(SRC_DIR)/,$(SRC_FILES))
 OBJ_DIR = obj
 OBJ_FILES = $(SRC_FILES:.c=.o)
