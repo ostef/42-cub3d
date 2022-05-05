@@ -6,11 +6,22 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:03:38 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/03 16:10:50 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 17:01:00 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+t_rgba	rgba(t_u8 r, t_u8 g, t_u8 b, t_u8 a)
+{
+	t_rgba	res;
+
+	res.r = r;
+	res.g = g;
+	res.b = b;
+	res.a = a;
+	return (res);
+}
 
 t_u32	rgba_to_trgb(t_rgba x)
 {
