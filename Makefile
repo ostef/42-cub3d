@@ -5,7 +5,8 @@ SRC_DIR = source
 SRC_FILES = main.c game.c window.c inputs.c handle_pause.c\
 	graphics/image.c\
 	math/rgba.c\
-	parse/parse.c parse/utils.c parse/textures.c parse/colors.c parse/description.c
+	parse/parse.c parse/utils.c parse/textures.c parse/colors.c parse/description.c\
+	raycasting/base.c
 
 SRCS = $(addprefix $(SRC_DIR)/,$(SRC_FILES))
 OBJ_DIR = obj
