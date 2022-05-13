@@ -6,7 +6,7 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:43:57 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/13 17:04:25 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/13 17:33:12 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int	mouse_move(int x, int y, void *g)
 	}
 	else
 	{
-		game->params.mouse_coord.x += x;
-		game->params.mouse_coord.y += y;
+		game->params.mouse_coord.x += x - SCREEN_WIDTH / 2;
+		game->params.mouse_coord.y += y - SCREEN_HEIGHT / 2;
 	}
 	return (0);
 	(void)x;
