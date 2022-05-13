@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/03 16:19:52 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/12 14:03:47 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
+
+# define START_CHAR ' '
+# define END_CHAR 'Z'
+# define WIDTH_CHAR 16
+# define HEIGHT_CHAR 16
+
+# define MARGIN 10
+
+# define MAIN_MENU 0
+# define OPTIONS 1
+# define GAME 2
+
+typedef struct s_game t_game;
 
 typedef enum e_x11event
 {
@@ -180,12 +193,34 @@ typedef struct s_param
 	t_coord	mouse_coord;
 }				t_param;
 
+typedef void (*func) (t_game *game);
+
+typedef struct	s_ui
+{
+	t_uint	width;
+	t_uint	height;
+	t_int	top;
+	t_int	left;
+	t_str	str;
+	t_rgba	bg_color;
+	func	click;	
+	// t_rgba	color;
+}	t_ui;
+
+typedef struct	s_panel
+{
+	t_ui	list_ui[10];
+	t_uint	nb_ui;
+}	t_panel;
+
 typedef struct	s_game
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_image	frame;
-	t_bool	mouse_enabled;
+	t_image	font;
+	t_panel	panels[3];
+	t_int	state;
 	t_map	map;
 	t_param	params;
 	t_vec2f	player_pos;
@@ -193,9 +228,13 @@ typedef struct	s_game
 }				t_game;
 
 void	init_game(t_game *game);
-void	start_game(t_game *game);
-void	stop_game(t_game *game);
 int		tick(void *params);
+
+/* Font */
+void	init_font(t_game *game);
+void	draw_char(t_game *game, char c, int x, int y);
+void	draw_str(t_game *game, t_str str, int x, int y);
+
 
 int		keydown(int keycode, void *in);
 int		keyup(int keycode, void *in);
@@ -203,12 +242,17 @@ int		mouse_press(int keycode, int x, int y, void *in);
 int		mouse_release(int keycode, int x, int y, void *in);
 int		mouse_move(int x, int y, void *in);
 
+void	click_panel(t_game *game, int x, int y);
+void	create_panels(t_game *game);
+void	draw_panel(t_game *game);
+
 t_bool	eprint(t_cstr fmt, ...);
 t_bool	parse_map(t_map *map, t_cstr filename);
 
 /* Image */
 
 void	init_image(t_game *game, t_image *img, int width, int height);
+void	init_image_xpm(t_game *game, t_image *img, t_str filename);
 void	set_px(t_image *img, int x, int y, t_rgba color);
 t_rgba	get_px(t_image *img, int x, int y);
 
