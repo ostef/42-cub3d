@@ -6,7 +6,7 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 15:59:11 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/13 14:00:38 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/13 14:02:41 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	clear_image(t_image *img, t_rgba col)
 		while (x < img->width)
 		{
 			dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-			*(t_u32 *)dst = 0;
+			*(t_u32 *)dst = trgb;
 			x += 1;
 		}
 		y += 1;

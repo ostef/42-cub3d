@@ -6,7 +6,7 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/13 13:50:45 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/13 14:01:26 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include "mlx.h"
 # include "libft.h"
+
+# include "cube_math.h"
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
@@ -130,18 +132,6 @@ typedef enum e_key
 	KEY_CTRL = 256,
 }	t_key;
 
-typedef union u_rgba
-{
-	struct
-	{
-		t_u8	r;
-		t_u8	g;
-		t_u8	b;
-		t_u8	a;
-	};
-	t_u8		n[4];
-}	t_rgba;
-
 /* A t_map has all the information that is in a .cub file, in a somewhat
  * structured manner. This is not the in-game map that you see on screen,
  * where you have ennemies and stuff running around. */
@@ -180,12 +170,6 @@ typedef struct	s_coord
 	int	x;
 	int	y;
 }				t_coord;
-
-typedef struct s_vec2f
-{
-	t_f32	x;
-	t_f32	y;
-}	t_vec2f;
 
 typedef struct s_param
 {
@@ -264,11 +248,5 @@ void	destroy_image(t_game *game, t_image *img);
 void	clear_image(t_image *img, t_rgba col);
 void	set_px(t_image *img, int x, int y, t_rgba color);
 t_rgba	get_px(t_image *img, int x, int y);
-
-/* Math */
-
-t_rgba	rgba(t_u8 r, t_u8 g, t_u8 b, t_u8 a);
-t_u32	rgba_to_trgb(t_rgba x);
-t_rgba	trgb_to_rgba(t_u32 x);
 
 #endif

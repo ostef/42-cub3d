@@ -1,43 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rgba.c                                             :+:      :+:    :+:   */
+/*   construct.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 16:03:38 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/05 17:01:00 by soumanso         ###   ########lyon.fr   */
+/*   Created: 2022/05/13 13:43:42 by soumanso          #+#    #+#             */
+/*   Updated: 2022/05/13 13:44:12 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "cube_math.h"
 
-t_rgba	rgba(t_u8 r, t_u8 g, t_u8 b, t_u8 a)
+t_vec2f	vec2f(t_f32 x, t_f32 y)
 {
-	t_rgba	res;
+	t_vec2f	res;
 
-	res.r = r;
-	res.g = g;
-	res.b = b;
-	res.a = a;
-	return (res);
-}
-
-t_u32	rgba_to_trgb(t_rgba x)
-{
-	t_u32	res;
-
-	res =  ((255 - x.r) << 24) | (x.r << 16) | (x.g << 8) | (x.b);
-	return (res);
-}
-
-t_rgba	trgb_to_rgba(t_u32 x)
-{
-	t_rgba	res;
-
-	res.a = 255 - ((x >> 24) & 0xff);
-	res.r = (x >> 16) & 0xff;
-	res.g = (x >> 8) & 0xff;
-	res.b = (x) & 0xff;
+	res.x = x;
+	res.y = y;
 	return (res);
 }
