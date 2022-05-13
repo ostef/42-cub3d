@@ -6,7 +6,7 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:16:45 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/02 17:50:36 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/13 13:57:51 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,27 @@ t_bool	eprint(t_cstr fmt, ...)
 	return (FALSE);
 }
 
+int	tick(void *params)
+{
+	t_game	*game;
+
+	game = (t_game *)params;
+	update (game);
+	render (game);
+	mlx_put_image_to_window (game->mlx, game->mlx_win, game->frame.mlx_img, 0, 0);
+	return (0);
+}
+
 t_int	main(t_int argc, t_str *args)
 {
 	t_game	game;
-	t_map	map;
 
-	if (!parse_map (&map, "data/maps/first.cub"))
-		return (EXIT_FAILURE);
-	ft_println ("NO '%s'", map.tex_names[0]);
-	ft_println ("SO '%s'", map.tex_names[1]);
-	ft_println ("WE '%s'", map.tex_names[2]);
-	ft_println ("EA '%s'", map.tex_names[3]);
-	ft_println ("F %u,%u,%u", map.colors[0].r, map.colors[0].g, map.colors[0].b);
-	ft_println ("C %u,%u,%u", map.colors[1].r, map.colors[1].g, map.colors[1].b);
-	for (int y = 0; y < map.height; y += 1)
-	{
-		for (int x = 0; x < map.width; x += 1)
-		{
-			ft_print ("%c", map.data[y * map.width + x]);
-		}
-		ft_print ("\n");
-	}
-	init_game(&game);
 	(void)argc;
 	(void)args;
+	ft_memset (&game, 0, sizeof (game));
+	if (!parse_map (&game.map, "data/maps/first.cub"))
+		return (EXIT_FAILURE);
+	init_game(&game);
 	if (ft_get_heap_allocations () != 0)
 		ft_fprintln (STDERR, "Found %i leaks.", ft_get_heap_allocations ());
 	return (EXIT_SUCCESS);

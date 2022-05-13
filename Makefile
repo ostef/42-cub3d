@@ -2,11 +2,13 @@ NAME = cube
 INCLUDE_DIRS = . libft mlx
 INCLUDE_FILES = cube.h
 SRC_DIR = source
-SRC_FILES = main.c window.c inputs.c image.c\
+SRC_FILES = main.c game.c window.c inputs.c\
+	graphics/image.c\
 	math/rgba.c\
 	ui/create_ui.c\
 	parse/parse.c parse/utils.c parse/textures.c parse/colors.c parse/description.c\
-	font/init.c
+	font/init.c\
+	raycasting/base.c
 
 SRCS = $(addprefix $(SRC_DIR)/,$(SRC_FILES))
 OBJ_DIR = obj
@@ -16,7 +18,7 @@ LIB_DIRS = libft mlx
 LIBS = ft mlx
 DEPENDENCIES = $(INCLUDE_FILES) Makefile libft/libft.a mlx/libmlx.a
 CC = gcc
-C_FLAGS = $(addprefix -I, $(INCLUDE_DIRS)) -Wall -Wextra -Werror
+C_FLAGS = $(addprefix -I, $(INCLUDE_DIRS)) #-Wall -Wextra -Werror
 LINK_FLAGS = $(addprefix -L, $(LIB_DIRS)) $(addprefix -l, $(LIBS)) -framework OpenGL -framework AppKit
 
 all : | libft mlx $(NAME)
