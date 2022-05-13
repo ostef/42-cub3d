@@ -6,7 +6,7 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:02:29 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/05 17:27:20 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/05 18:17:29 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	init_game(t_game *game)
 	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cube3d");
 	if (!init_image (game, &game->frame, SCREEN_WIDTH, SCREEN_HEIGHT))
 		ft_panic ("Could not initialize framebuffer.");
-	mlx_hook(game->mlx_win, MOUSE_PRESS, 0L, mouse_press, &game->params.inputs);
-	mlx_hook(game->mlx_win, MOUSE_RELEASE, 0L, mouse_release, &game->params.inputs);
-	mlx_hook(game->mlx_win, MOUSE_MOVE, 0L, mouse_move, &game->params.mouse_coord);
-	mlx_hook(game->mlx_win, KEY_PRESS, 0L, keydown, &game->params.inputs);
-	mlx_hook(game->mlx_win, KEY_RELEASE, 0L, keyup, &game->params.inputs);
+	mlx_hook(game->mlx_win, MOUSE_PRESS, 0L, mouse_press, game);
+	mlx_hook(game->mlx_win, MOUSE_RELEASE, 0L, mouse_release, game);
+	mlx_hook(game->mlx_win, MOUSE_MOVE, 0L, mouse_move, game);
+	mlx_hook(game->mlx_win, KEY_PRESS, 0L, keydown, game);
+	mlx_hook(game->mlx_win, KEY_RELEASE, 0L, keyup, game);
 	mlx_hook(game->mlx_win, DESTROY_NOTIFY, 0L, destroy, NULL);
 	start_game(game);
 	for (int y = 0; y < game->map.height; y += 1)
