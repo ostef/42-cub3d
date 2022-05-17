@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/13 14:01:26 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 16:53:25 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <stdio.h>
 # include "mlx.h"
 # include "libft.h"
-
-# include "cube_math.h"
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
@@ -34,6 +32,68 @@
 # define GAME 2
 
 typedef struct s_game t_game;
+
+/* Math */
+
+typedef union u_rgba
+{
+	struct
+	{
+		t_u8	r;
+		t_u8	g;
+		t_u8	b;
+		t_u8	a;
+	};
+	t_u8		n[4];
+}	t_rgba;
+
+t_rgba	rgba(t_u8 r, t_u8 g, t_u8 b, t_u8 a);
+t_u32	rgba_to_trgb(t_rgba x);
+t_rgba	trgb_to_rgba(t_u32 x);
+
+typedef union u_vec2f
+{
+	t_f32		n[2];
+	struct
+	{
+		t_f32	x;
+		t_f32	y;
+	};
+}	t_vec2f;
+
+t_vec2f	vec2f(t_f32 x, t_f32 y);
+t_vec2f	vec2f_add(t_vec2f lhs, t_vec2f rhs);
+t_vec2f	vec2f_sub(t_vec2f lhs, t_vec2f rhs);
+t_vec2f	vec2f_neg(t_vec2f v);
+t_vec2f	vec2f_mul(t_vec2f v, t_f32 s);
+t_vec2f	vec2f_div(t_vec2f v, t_f32 s);
+t_f32	vec2f_dot(t_vec2f a, t_vec2f b);
+t_vec2f	vec2f_perp_cw(t_vec2f v);
+t_vec2f	vec2f_perp_ccw(t_vec2f v);
+
+typedef union u_recti
+{
+	t_int		n[4];
+	struct
+	{
+		t_int	x;
+		t_int	y;
+		t_int	w;
+		t_int	h;
+	};
+}	t_recti;
+
+t_recti	recti(t_int x, t_int y, t_int w, t_int h);
+
+typedef struct u_coord
+{
+	t_int		n[2];
+	struct
+	{
+		t_int	x;
+		t_int	y;
+	};
+}	t_coord;
 
 typedef enum e_x11event
 {
@@ -145,17 +205,6 @@ typedef struct s_map
 	char	*data;
 }	t_map;
 
-typedef struct	s_image
-{
-	void	*mlx_img;
-	char	*addr;
-	int		width;
-	int		height;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_image;
-
 typedef struct	s_keys
 {
 	int	forward;
@@ -164,12 +213,6 @@ typedef struct	s_keys
 	int	right;
 	int	shoot;
 }				t_keys;
-
-typedef struct	s_coord
-{
-	int	x;
-	int	y;
-}				t_coord;
 
 typedef struct s_param
 {
@@ -201,8 +244,8 @@ typedef struct	s_game
 {
 	void	*mlx;
 	void	*mlx_win;
-	t_image	frame;
-	t_image	font;
+	t_img	frame;
+	t_img	font;
 	t_panel	panels[3];
 	t_int	state;
 	t_map	map;
@@ -240,13 +283,33 @@ void	draw_panel(t_game *game);
 t_bool	eprint(t_cstr fmt, ...);
 t_bool	parse_map(t_map *map, t_cstr filename);
 
-/* Image */
+/* Graphics */
 
-t_bool	init_image(t_game *game, t_image *img, int width, int height);
-void	init_image_xpm(t_game *game, t_image *img, t_str filename);
-void	destroy_image(t_game *game, t_image *img);
-void	clear_image(t_image *img, t_rgba col);
-void	set_px(t_image *img, int x, int y, t_rgba color);
-t_rgba	get_px(t_image *img, int x, int y);
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
+
+
+t_bool	init_img(t_game *game, t_img *img, int width, int height);
+t_bool	init_img_xpm(t_game *game, t_img *img, t_str filename);
+void	destroy_img(t_game *game, t_img *img);
+void	clear_img(t_img *img, t_rgba col);
+void	set_px(t_img *img, int x, int y, t_rgba color);
+t_rgba	get_px(t_img *img, int x, int y);
+
+/*
+void	draw_point(t_game *game, t_int x, t_int y, t_f32 size, t_rgba col);
+void	draw_rect(t_game *game, t_int x, t_int y, t_int w, t_int h, t_rgba c);
+void	draw_circle(t_game *game, t_int x, t_int y, t_f32 rad, t_rgba c);
+*/
+void	draw_img(t_game *game, t_int x, t_int y, t_img *img);
+void	draw_img_part(t_game *game, t_coord at, t_img *img, t_recti r);
 
 #endif
