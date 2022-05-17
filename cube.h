@@ -6,7 +6,7 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/17 16:53:25 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 17:10:29 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define MAIN_MENU 0
 # define OPTIONS 1
 # define GAME 2
+
+/* Stupid forward declarations */
 
 typedef struct s_game t_game;
 
@@ -94,6 +96,123 @@ typedef struct u_coord
 		t_int	y;
 	};
 }	t_coord;
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
+
+/* A t_map has all the information that is in a .cub file, in a somewhat
+ * structured manner. This is not the in-game map that you see on screen,
+ * where you have ennemies and stuff running around. */
+
+typedef struct s_map
+{
+	t_str	tex_names[4];
+	t_rgba	colors[2];
+	t_int	width;
+	t_int	height;
+	char	*data;
+}	t_map;
+
+typedef struct s_keys
+{
+	int	forward;
+	int	backward;
+	int	left;
+	int	right;
+	int	shoot;
+}	t_keys;
+
+typedef struct s_param
+{
+	t_bool	inputs[1024];
+	t_coord	mouse_coord;
+}				t_param;
+
+// @Cleanup (stefan): func is a bad name. Name this something UI related.
+typedef void (*func) (t_game *game);
+
+typedef struct s_ui
+{
+	t_uint	width;
+	t_uint	height;
+	t_int	top;
+	t_int	left;
+	t_str	str;
+	t_rgba	bg_color;
+	func	click;	
+	// t_rgba	color;
+}	t_ui;
+
+typedef struct	s_panel
+{
+	t_ui	list_ui[10];
+	t_uint	nb_ui;
+}	t_panel;
+
+typedef struct	s_game
+{
+	void	*mlx;
+	void	*mlx_win;
+	t_img	frame;
+	t_img	font;
+	t_panel	panels[3];
+	t_int	state;
+	t_map	map;
+	t_param	params;
+	t_vec2f	player_pos;
+	t_vec2f	cam_dir;
+}	t_game;
+
+void	init_game(t_game *game);
+int		tick(void *params);
+void	update(t_game *game);
+void	render(t_game *game);
+
+/* Font */
+
+void	init_font(t_game *game);
+void	draw_char(t_game *game, char c, int x, int y);
+void	draw_str(t_game *game, t_str str, int x, int y);
+
+/* Image */
+
+t_bool	init_img(t_game *game, t_img *img, int width, int height);
+t_bool	init_img_xpm(t_game *game, t_img *img, t_str filename);
+void	destroy_img(t_game *game, t_img *img);
+void	clear_img(t_img *img, t_rgba col);
+void	set_px(t_img *img, int x, int y, t_rgba color);
+t_rgba	get_px(t_img *img, int x, int y);
+
+int		keydown(int keycode, void *in);
+int		keyup(int keycode, void *in);
+int		mouse_press(int keycode, int x, int y, void *in);
+int		mouse_release(int keycode, int x, int y, void *in);
+int		mouse_move(int x, int y, void *in);
+
+void	click_panel(t_game *game, int x, int y);
+void	create_panels(t_game *game);
+void	draw_panel(t_game *game);
+
+t_bool	eprint(t_cstr fmt, ...);
+t_bool	parse_map(t_map *map, t_cstr filename);
+
+/* Drawing */
+
+/*
+void	draw_point(t_game *game, t_int x, t_int y, t_f32 size, t_rgba col);
+void	draw_rect(t_game *game, t_int x, t_int y, t_int w, t_int h, t_rgba c);
+void	draw_circle(t_game *game, t_int x, t_int y, t_f32 rad, t_rgba c);
+*/
+void	draw_img(t_game *game, t_int x, t_int y, t_img *img);
+void	draw_img_part(t_game *game, t_coord at, t_img *img, t_recti r);
 
 typedef enum e_x11event
 {
@@ -191,125 +310,5 @@ typedef enum e_key
 	KEY_F2 = 120,
 	KEY_CTRL = 256,
 }	t_key;
-
-/* A t_map has all the information that is in a .cub file, in a somewhat
- * structured manner. This is not the in-game map that you see on screen,
- * where you have ennemies and stuff running around. */
-
-typedef struct s_map
-{
-	t_str	tex_names[4];
-	t_rgba	colors[2];
-	t_int	width;
-	t_int	height;
-	char	*data;
-}	t_map;
-
-typedef struct	s_keys
-{
-	int	forward;
-	int	backward;
-	int	left;
-	int	right;
-	int	shoot;
-}				t_keys;
-
-typedef struct s_param
-{
-	t_bool	inputs[1024];
-	t_coord	mouse_coord;
-}				t_param;
-
-typedef void (*func) (t_game *game);
-
-typedef struct	s_ui
-{
-	t_uint	width;
-	t_uint	height;
-	t_int	top;
-	t_int	left;
-	t_str	str;
-	t_rgba	bg_color;
-	func	click;	
-	// t_rgba	color;
-}	t_ui;
-
-typedef struct	s_panel
-{
-	t_ui	list_ui[10];
-	t_uint	nb_ui;
-}	t_panel;
-
-typedef struct	s_game
-{
-	void	*mlx;
-	void	*mlx_win;
-	t_img	frame;
-	t_img	font;
-	t_panel	panels[3];
-	t_int	state;
-	t_map	map;
-	t_param	params;
-	t_vec2f	player_pos;
-	t_vec2f	cam_dir;
-}				t_game;
-
-typedef struct s_raycaster
-{
-	
-}	t_raycaster;
-
-void	init_game(t_game *game);
-int		tick(void *params);
-void	update(t_game *game);
-void	render(t_game *game);
-
-/* Font */
-void	init_font(t_game *game);
-void	draw_char(t_game *game, char c, int x, int y);
-void	draw_str(t_game *game, t_str str, int x, int y);
-
-
-int		keydown(int keycode, void *in);
-int		keyup(int keycode, void *in);
-int		mouse_press(int keycode, int x, int y, void *in);
-int		mouse_release(int keycode, int x, int y, void *in);
-int		mouse_move(int x, int y, void *in);
-
-void	click_panel(t_game *game, int x, int y);
-void	create_panels(t_game *game);
-void	draw_panel(t_game *game);
-
-t_bool	eprint(t_cstr fmt, ...);
-t_bool	parse_map(t_map *map, t_cstr filename);
-
-/* Graphics */
-
-typedef struct s_img
-{
-	void	*mlx_img;
-	char	*addr;
-	int		width;
-	int		height;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img;
-
-
-t_bool	init_img(t_game *game, t_img *img, int width, int height);
-t_bool	init_img_xpm(t_game *game, t_img *img, t_str filename);
-void	destroy_img(t_game *game, t_img *img);
-void	clear_img(t_img *img, t_rgba col);
-void	set_px(t_img *img, int x, int y, t_rgba color);
-t_rgba	get_px(t_img *img, int x, int y);
-
-/*
-void	draw_point(t_game *game, t_int x, t_int y, t_f32 size, t_rgba col);
-void	draw_rect(t_game *game, t_int x, t_int y, t_int w, t_int h, t_rgba c);
-void	draw_circle(t_game *game, t_int x, t_int y, t_f32 rad, t_rgba c);
-*/
-void	draw_img(t_game *game, t_int x, t_int y, t_img *img);
-void	draw_img_part(t_game *game, t_coord at, t_img *img, t_recti r);
 
 #endif

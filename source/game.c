@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:38:26 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/13 13:58:22 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 17:11:26 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	raycast_all(t_game *game);
 
 void	render(t_game *game)
 {
-	clear_image (&game->frame, rgba (30, 30, 45, 255));
+	clear_img (&game->frame, rgba (30, 30, 45, 255));
 	draw_panel(game);
 	if (game->state == GAME)
 		raycast_all (game);

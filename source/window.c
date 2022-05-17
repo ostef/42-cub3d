@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:02:29 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/13 13:54:28 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 17:11:34 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cube3d");
-	if (!init_image (game, &game->frame, SCREEN_WIDTH, SCREEN_HEIGHT))
+	if (!init_img (game, &game->frame, SCREEN_WIDTH, SCREEN_HEIGHT))
 		ft_panic ("Could not initialize framebuffer.");
 	ft_memset(&game->params, 0, sizeof(t_param));
 	init_font(game);
