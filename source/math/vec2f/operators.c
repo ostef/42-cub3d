@@ -6,11 +6,11 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:41:07 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/13 13:43:53 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 16:54:47 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube_math.h"
+#include "cube.h"
 
 t_vec2f	vec2f_add(t_vec2f lhs, t_vec2f rhs)
 {

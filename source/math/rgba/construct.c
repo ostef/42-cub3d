@@ -6,11 +6,11 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:03:38 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/13 14:01:21 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 16:54:52 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube_math.h"
+#include "cube.h"
 
 t_rgba	rgba(t_u8 r, t_u8 g, t_u8 b, t_u8 a)
 {
