@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:20:10 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/12 13:39:41 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 16:56:15 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_font(t_game *game)
 {
-	init_image_xpm(game, &game->font, "data/images/font.xpm");
+	init_img_xpm(game, &game->font, "data/images/font.xpm");
 }
 
 void	draw_char(t_game *game, char c, int x, int y)
