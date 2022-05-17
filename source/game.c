@@ -6,28 +6,36 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:38:26 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/17 17:11:26 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 17:13:11 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+#include <math.h>
+
+static const double sensitivity = 10000;
 
 void	update(t_game *game)
 {
 	if (game->state == GAME)
 	{
+		game->cam_dir.x = cos(((double)game->params.mouse_coord.x / sensitivity * PI) + atan2(game->cam_dir.y, game->cam_dir.x));
+		game->cam_dir.y = sin(((double)game->params.mouse_coord.x / sensitivity * PI) + atan2(game->cam_dir.y, game->cam_dir.x));
+		printf("cam x: %lf\n", game->cam_dir.x);
+		printf("cam y: %lf\n", game->cam_dir.y);
+		mlx_mouse_move(game->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 		game->params.mouse_coord.x = 0;
 		game->params.mouse_coord.y = 0;
-		if (game->params.inputs[KEY_D])
+		if (game->params.inputs[game->keys.keys[RIGHT]])
 			game->player_pos.x += 0.2f;
-		if (game->params.inputs[KEY_A])
+		if (game->params.inputs[game->keys.keys[LEFT]])
 			game->player_pos.x -= 0.2f;
-		if (game->params.inputs[KEY_W])
+		if (game->params.inputs[game->keys.keys[FORWARD]])
 			game->player_pos.y -= 0.2f;
-		if (game->params.inputs[KEY_S])
+		if (game->params.inputs[game->keys.keys[BACKWARD]])
 			game->player_pos.y += 0.2f;
-		printf ("%.3f %.3f\n", game->player_pos.x, game->player_pos.y);
-		mlx_mouse_move(game->mlx_win, 0, 0);
+		// printf ("%.3f %.3f\n", game->player_pos.x, game->player_pos.y);
+		// mlx_mouse_move(game->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 		mlx_mouse_hide();
 	}
 	else

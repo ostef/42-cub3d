@@ -6,7 +6,7 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:02:29 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/17 17:11:34 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 17:13:12 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ int	destroy(int keycode, void *null)
 	return (0);
 }
 
+void	init_keys(t_game *game)
+{
+	t_keys	*keys = &game->keys;
+	
+	keys->keys[FORWARD] = KEY_UP;
+	keys->keys[BACKWARD] = KEY_DOWN;
+	keys->keys[LEFT] = KEY_LEFT;
+	keys->keys[RIGHT] = KEY_RIGHT;
+	keys->keys[SHOOT] = KEY_CTRL;
+	keys->change_key = NO_CHANGE;
+}
+
 void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
@@ -30,6 +42,7 @@ void	init_game(t_game *game)
 		ft_panic ("Could not initialize framebuffer.");
 	ft_memset(&game->params, 0, sizeof(t_param));
 	init_font(game);
+	init_keys(game);
 	create_panels(game);
 	mlx_hook(game->mlx_win, MOUSE_PRESS, 0L, mouse_press, game);
 	mlx_hook(game->mlx_win, MOUSE_RELEASE, 0L, mouse_release, game);
@@ -72,13 +85,4 @@ void	init_game(t_game *game)
 	}
 	mlx_loop_hook(game->mlx, tick, game);
 	mlx_loop(game->mlx);
-}
-
-void	init_keys(t_keys *keys)
-{
-	keys->forward = KEY_UP;
-	keys->backward = KEY_DOWN;
-	keys->left = KEY_LEFT;
-	keys->right = KEY_RIGHT;
-	keys->shoot = KEY_CTRL;
 }

@@ -6,7 +6,7 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/17 17:10:29 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/17 17:17:47 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,19 @@ typedef struct s_map
 	char	*data;
 }	t_map;
 
+typedef enum e_controls {
+	FORWARD,
+	BACKWARD,
+	LEFT,
+	RIGHT,
+	SHOOT,
+	NO_CHANGE
+}	t_controls;
+
 typedef struct s_keys
 {
-	int	forward;
-	int	backward;
-	int	left;
-	int	right;
-	int	shoot;
+	t_controls	change_key;
+	int			keys[5];
 }	t_keys;
 
 typedef struct s_param
@@ -167,6 +173,7 @@ typedef struct	s_game
 	t_int	state;
 	t_map	map;
 	t_param	params;
+	t_keys	keys;
 	t_vec2f	player_pos;
 	t_vec2f	cam_dir;
 }	t_game;

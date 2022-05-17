@@ -6,7 +6,7 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:52:20 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/12 14:07:28 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/13 17:03:02 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	exit_click(t_game *game)
 	(void)game;
 }
 
-void	create_panels(t_game *game)
+void	init_main_menu(t_game *game)
 {
 	t_panel	menu;
 
@@ -85,7 +85,60 @@ void	create_panels(t_game *game)
 	create_ui(&menu, (SCREEN_HEIGHT - (HEIGHT_CHAR + MARGIN * 2)) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("options")) / 2 - MARGIN, "options", option);
 	create_ui(&menu, (SCREEN_HEIGHT + (HEIGHT_CHAR + MARGIN * 2) * 2) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("exit")) / 2 - MARGIN, "exit", exit_click);
 	game->panels[MAIN_MENU] = menu;
+}
+
+void	set_forward(t_game *game)
+{
+	game->keys.change_key = FORWARD; 
+}
+
+void	set_backward(t_game *game)
+{
+	game->keys.change_key = BACKWARD; 
+}
+
+void	set_left(t_game *game)
+{
+	game->keys.change_key = LEFT; 
+}
+
+void	set_right(t_game *game)
+{
+	game->keys.change_key = RIGHT; 
+}
+
+void	set_shoot(t_game *game)
+{
+	game->keys.change_key = SHOOT; 
+}
+
+void	back(t_game *game)
+{
+	game->keys.change_key = NO_CHANGE;
+	game->state = MAIN_MENU; 
+}
+
+void	init_option_menu(t_game *game)
+{
+	t_panel	options;
+
+	ft_memset(&options, 0, sizeof(t_panel));
+	game->panels[GAME] = options;
+	game->panels[OPTIONS] = options;
+	create_ui(&options, (SCREEN_HEIGHT - (HEIGHT_CHAR + MARGIN * 2) * 6) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("forward")) / 2 - MARGIN, "forward", set_forward);
+	create_ui(&options, (SCREEN_HEIGHT - (HEIGHT_CHAR + MARGIN * 2) * 4) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("backward")) / 2 - MARGIN, "backward", set_backward);
+	create_ui(&options, (SCREEN_HEIGHT - (HEIGHT_CHAR + MARGIN * 2) * 2) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("left")) / 2 - MARGIN, "left", set_left);
+	create_ui(&options, (SCREEN_HEIGHT + (HEIGHT_CHAR + MARGIN * 2) * 2) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("right")) / 2 - MARGIN, "right", set_right);
+	create_ui(&options, (SCREEN_HEIGHT + (HEIGHT_CHAR + MARGIN * 2) * 4) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("shoot")) / 2 - MARGIN, "shoot", set_right);
+	create_ui(&options, (SCREEN_HEIGHT + (HEIGHT_CHAR + MARGIN * 2) * 7) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("back")) / 2 - MARGIN, "back", back);
+	game->panels[OPTIONS] = options;
+}
+
+void	create_panels(t_game *game)
+{
 	game->state = MAIN_MENU;
+	init_main_menu(game);
+	init_option_menu(game);
 }
 
 void	draw_ui(t_game *game, t_ui ui)
@@ -119,5 +172,22 @@ void	draw_panel(t_game *game)
 	{
 		draw_ui(game, panel.list_ui[i]);
 		i++;
+	}
+	if (game->state == OPTIONS && game->keys.change_key != NO_CHANGE)
+	{
+		t_ui	ui;
+
+		ft_memset(&ui, 0, sizeof(t_ui));
+		ui.top = SCREEN_WIDTH / 2;
+		ui.left = SCREEN_HEIGHT / 2;
+		ui.width = ft_strlen("type a key:") * WIDTH_CHAR + MARGIN * 2;
+		ui.height = HEIGHT_CHAR + MARGIN * 2;
+		ui.bg_color.r = 100;
+		ui.bg_color.g = 100;
+		ui.bg_color.b = 100;
+		ui.bg_color.a = 255;
+		ui.click = NULL;
+		ui.str = "type a key:";
+		draw_ui(game, ui);
 	}
 }
