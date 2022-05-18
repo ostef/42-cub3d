@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:02:58 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/18 17:45:27 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/18 18:24:28 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,27 @@ void	raycast_all(t_game *game)
 		int draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
+		float wall_x;
+		if (side == 0)
+			wall_x = game->player_pos.y + perp_wall_dist * ray_dir.y;
+		else
+			wall_x = game->player_pos.x + perp_wall_dist * ray_dir.x;
+		wall_x -= floor (wall_x);
+		int tex_x = (int)(wall_x * game->map.tex_img[0].width);
+		if (side == 0 && ray_dir.x > 0)
+			tex_x = game->map.tex_img[0].width - tex_x - 1;
+		if (side == 1 && ray_dir.y < 0)
+			tex_x = game->map.tex_img[0].width - tex_x - 1;
 		for (int y = draw_start; y < draw_end; y += 1)
 		{
+			int tex_y = (y + line_height / 2 - SCREEN_HEIGHT / 2) * game->map.tex_img[0].height / (line_height);
+			tex_y = ft_clamp (tex_y, 0, game->map.tex_img[0].height - 1);
 			// set_px (&game->frame, x, y, rgba (255, 0, 0, 255));
-			set_px(&game->frame, x, y, get_px(&game->map.tex_img[0], 0, (y - draw_start) * game->map.tex_img[0].height / (draw_end - draw_start)));
+			set_px(&game->frame, x, y, get_px(
+				&game->map.tex_img[0],
+				tex_x,
+				tex_y
+			));
 		}
 		x += 1;
 	}
