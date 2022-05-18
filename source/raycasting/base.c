@@ -6,7 +6,7 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:02:58 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/18 18:25:27 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/18 18:28:00 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,10 @@ void	raycast_all(t_game *game)
 			tex_x = game->map.tex_img[0].width - tex_x - 1;
 		if (side == 1 && ray_dir.y < 0)
 			tex_x = game->map.tex_img[0].width - tex_x - 1;
+		for (int y = 0; y < draw_start; y += 1)
+		{
+			set_px (&game->frame, x, y, game->map.colors[0]);
+		}
 		for (int y = draw_start; y < draw_end; y += 1)
 		{
 			int tex_y = (y + line_height / 2 - SCREEN_HEIGHT / 2) * game->map.tex_img[0].height / (line_height);
@@ -109,6 +113,10 @@ void	raycast_all(t_game *game)
 				tex_x,
 				tex_y
 			));
+		}
+		for (int y = draw_end; y < SCREEN_HEIGHT - 1; y += 1)
+		{
+			set_px (&game->frame, x, y, game->map.colors[1]);
 		}
 		x += 1;
 	}
