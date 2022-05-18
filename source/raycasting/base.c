@@ -6,7 +6,7 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:02:58 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/18 18:24:28 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/18 18:25:27 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	raycast_all(t_game *game)
 		{
 			int tex_y = (y + line_height / 2 - SCREEN_HEIGHT / 2) * game->map.tex_img[0].height / (line_height);
 			tex_y = ft_clamp (tex_y, 0, game->map.tex_img[0].height - 1);
-			// set_px (&game->frame, x, y, rgba (255, 0, 0, 255));
 			set_px(&game->frame, x, y, get_px(
 				&game->map.tex_img[0],
 				tex_x,
