@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/17 17:17:47 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/18 17:22:28 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_img
 typedef struct s_map
 {
 	t_str	tex_names[4];
+	t_img	tex_img[4];
 	t_rgba	colors[2];
 	t_int	width;
 	t_int	height;

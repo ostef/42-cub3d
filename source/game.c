@@ -6,7 +6,7 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:38:26 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/18 15:15:03 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/18 17:16:01 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	update(t_game *game)
 		{
 			game->player_pos.y -= move_speed * game->cam_dir.x;
 			game->player_pos.x += move_speed * game->cam_dir.y;
-			// game->player_pos.x -= 0.2f;
 		}
 		if (game->params.inputs[game->keys.keys[FORWARD]])
 		{			
@@ -48,8 +47,6 @@ void	update(t_game *game)
 			game->player_pos.y -= move_speed * game->cam_dir.y;
 			game->player_pos.x -= move_speed * game->cam_dir.x;
 		}
-		// printf ("%.3f %.3f\n", game->player_pos.x, game->player_pos.y);
-		// mlx_mouse_move(game->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 		mlx_mouse_hide();
 	}
 	else

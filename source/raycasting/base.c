@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:02:58 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/13 13:31:35 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/18 17:45:27 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ void	raycast_all(t_game *game)
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
 		for (int y = draw_start; y < draw_end; y += 1)
-			set_px (&game->frame, x, y, rgba (255, 0, 0, 255));
+		{
+			// set_px (&game->frame, x, y, rgba (255, 0, 0, 255));
+			set_px(&game->frame, x, y, get_px(&game->map.tex_img[0], 0, (y - draw_start) * game->map.tex_img[0].height / (draw_end - draw_start)));
+		}
 		x += 1;
 	}
 }
