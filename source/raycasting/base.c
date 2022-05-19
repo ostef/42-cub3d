@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:02:58 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/18 18:28:00 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/19 16:48:51 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,22 @@ void	raycast_all(t_game *game)
 		}
 		for (int y = draw_start; y < draw_end; y += 1)
 		{
-			int tex_y = (y + line_height / 2 - SCREEN_HEIGHT / 2) * game->map.tex_img[0].height / (line_height);
-			tex_y = ft_clamp (tex_y, 0, game->map.tex_img[0].height - 1);
+			t_img	image;
+
+			if (side == 0 && ray_dir.x > 0)
+				image = game->map.tex_img[3];
+			else if (side == 0 && ray_dir.x < 0)
+				image = game->map.tex_img[2];
+			else if (side == 1 && ray_dir.y > 0)
+				image = game->map.tex_img[1];
+			else if (side == 1 && ray_dir.y < 0)
+				image = game->map.tex_img[0];
+			else
+				image = game->map.tex_img[side];
+			int tex_y = (y + line_height / 2 - SCREEN_HEIGHT / 2) * image.height / (line_height);
+			tex_y = ft_clamp (tex_y, 0, image.height - 1);
 			set_px(&game->frame, x, y, get_px(
-				&game->map.tex_img[0],
+				&image,
 				tex_x,
 				tex_y
 			));
