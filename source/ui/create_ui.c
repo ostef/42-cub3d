@@ -6,7 +6,7 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:52:20 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/13 17:03:02 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 13:17:25 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,19 @@ void	click_panel(t_game *game, int x, int y)
 
 void	play(t_game *game)
 {
-	printf("play\n");
+	mlx_mouse_hide();
 	game->state = GAME;
 	(void)game;
 }
 
 void	option(t_game *game)
 {
-	printf("options\n");
 	game->state = OPTIONS;
 	(void)game;
 }
 
 void	exit_click(t_game *game)
 {
-	printf("exit\n");
 	exit(EXIT_SUCCESS);
 	(void)game;
 }
@@ -178,8 +176,8 @@ void	draw_panel(t_game *game)
 		t_ui	ui;
 
 		ft_memset(&ui, 0, sizeof(t_ui));
-		ui.top = SCREEN_WIDTH / 2;
-		ui.left = SCREEN_HEIGHT / 2;
+		ui.top = SCREEN_HEIGHT / 2;
+		ui.left = SCREEN_WIDTH / 2;
 		ui.width = ft_strlen("type a key:") * WIDTH_CHAR + MARGIN * 2;
 		ui.height = HEIGHT_CHAR + MARGIN * 2;
 		ui.bg_color.r = 100;

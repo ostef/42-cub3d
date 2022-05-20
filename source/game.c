@@ -6,15 +6,15 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:38:26 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/18 17:16:01 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 13:12:36 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 #include <math.h>
 
-static const double sensitivity = 10000;
-static const double move_speed = 0.2f;
+static const double	sensitivity = 10000;
+static const double	move_speed = 0.2f;
 
 void	update(t_game *game)
 {
@@ -22,8 +22,6 @@ void	update(t_game *game)
 	{
 		game->cam_dir.x = cos(((double)game->params.mouse_coord.x / sensitivity * PI) + atan2(game->cam_dir.y, game->cam_dir.x));
 		game->cam_dir.y = sin(((double)game->params.mouse_coord.x / sensitivity * PI) + atan2(game->cam_dir.y, game->cam_dir.x));
-		printf("cam x: %lf\n", game->cam_dir.x);
-		printf("cam y: %lf\n", game->cam_dir.y);
 		mlx_mouse_move(game->mlx_win, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 		game->params.mouse_coord.x = 0;
 		game->params.mouse_coord.y = 0;
@@ -38,7 +36,7 @@ void	update(t_game *game)
 			game->player_pos.x += move_speed * game->cam_dir.y;
 		}
 		if (game->params.inputs[game->keys.keys[FORWARD]])
-		{			
+		{
 			game->player_pos.y += move_speed * game->cam_dir.y;
 			game->player_pos.x += move_speed * game->cam_dir.x;
 		}
@@ -47,10 +45,7 @@ void	update(t_game *game)
 			game->player_pos.y -= move_speed * game->cam_dir.y;
 			game->player_pos.x -= move_speed * game->cam_dir.x;
 		}
-		mlx_mouse_hide();
 	}
-	else
-		mlx_mouse_show();
 }
 
 void	raycast_all(t_game *game);

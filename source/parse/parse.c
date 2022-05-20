@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:02:18 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/02 15:49:03 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 13:20:10 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_bool	parse_map(t_map *map, t_cstr filename)
 	t_s64	i;
 	t_s64	adv;
 
-	ft_memset (map, 0, sizeof (*map));
+	ft_memset (map, 0, sizeof (map));
 	file_contents = ft_read_entire_file (filename, ft_heap ());
 	if (!file_contents)
 		return (eprint ("Could not read file '%s'.", filename));
