@@ -6,7 +6,7 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/20 15:17:00 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 17:01:54 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,10 @@ typedef struct s_hit
 {
 	t_bool	hit;
 	t_vec2f	dir;
-	t_f32	dist;
+	t_vec2f	delta_dist;
+	t_vec2f	side_dist;
+	t_int	side;
+	t_coord	coord;
 }	t_hit;
 
 t_hit	raycast(t_game *game, t_vec2f orig, t_vec2f dir, t_f32 len);

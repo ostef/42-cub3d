@@ -6,7 +6,7 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 14:41:30 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/20 15:36:22 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 16:58:05 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	update_player(t_game *game)
 	hit = raycast (game, game->player_pos,
 		vec2f_normalized (movement), vec2f_len (movement));
 	if (hit.hit)
-		movement = vec2f_mul (hit.dir, hit.dist);
+	{
+		ft_println ("Hit a wall.");
+		movement = vec2f_mul (hit.dir, vec2f_len (hit.side_dist));
+	}
 	game->player_pos = vec2f_add (game->player_pos, movement);
 }
