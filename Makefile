@@ -2,7 +2,7 @@ NAME = cube
 INCLUDE_DIRS = . libft mlx
 INCLUDE_FILES = cube.h
 SRC_DIR = source
-SRC_FILES = main.c game.c window.c inputs.c\
+SRC_FILES = main.c game.c window.c input.c events.c player.c\
 	gfx/img/init.c gfx/img/operations.c\
 	gfx/draw_img.c\
 	ui/create_ui.c\

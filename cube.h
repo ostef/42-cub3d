@@ -6,7 +6,7 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/18 18:09:22 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 14:59:57 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <math.h>
 # include "mlx.h"
 # include "libft.h"
+
+# define CAM_SENSITIVITY 10000
+# define MOVE_SPEED 0.2f
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
@@ -73,6 +76,8 @@ t_vec2f	vec2f_div(t_vec2f v, t_f32 s);
 t_f32	vec2f_dot(t_vec2f a, t_vec2f b);
 t_vec2f	vec2f_perp_cw(t_vec2f v);
 t_vec2f	vec2f_perp_ccw(t_vec2f v);
+t_f32	vec2f_len(t_vec2f v);
+t_vec2f	vec2f_normalized(t_vec2f v);
 
 typedef union u_recti
 {
@@ -183,6 +188,7 @@ typedef struct	s_game
 void	init_game(t_game *game);
 int		tick(void *params);
 void	update(t_game *game);
+void	update_player(t_game *game);
 void	render(t_game *game);
 
 /* Font */
@@ -212,6 +218,8 @@ void	draw_panel(t_game *game);
 
 t_bool	eprint(t_cstr fmt, ...);
 t_bool	parse_map(t_map *map, t_cstr filename);
+
+t_bool	is_key_down(t_game *game, int code);
 
 /* Drawing */
 
