@@ -10,7 +10,7 @@ SRC_FILES = main.c game.c window.c input.c events.c player.c\
 	math/vec2f/construct.c math/vec2f/geom.c math/vec2f/operators.c\
 	parse/parse.c parse/utils.c parse/textures.c parse/colors.c parse/description.c\
 	font/init.c\
-	raycasting/base.c
+	raycasting/cast.c raycasting/base.c
 
 SRCS = $(addprefix $(SRC_DIR)/,$(SRC_FILES))
 OBJ_DIR = obj

@@ -6,7 +6,7 @@
 /*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/20 14:59:57 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/20 15:17:00 by soumanso         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,17 @@ t_bool	eprint(t_cstr fmt, ...);
 t_bool	parse_map(t_map *map, t_cstr filename);
 
 t_bool	is_key_down(t_game *game, int code);
+
+/* Raycasting */
+
+typedef struct s_hit
+{
+	t_bool	hit;
+	t_vec2f	dir;
+	t_f32	dist;
+}	t_hit;
+
+t_hit	raycast(t_game *game, t_vec2f orig, t_vec2f dir, t_f32 len);
 
 /* Drawing */
 
