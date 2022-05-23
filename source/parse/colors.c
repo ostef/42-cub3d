@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:38 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/02 15:47:29 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 14:20:50 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static const t_cstr	g_cols[] = { "F", "C" };
+static const t_cstr	g_cols[] = {"F", "C"};
 
 static t_s64	parse_color(t_map *map, t_cstr str, t_int col_i)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 17:20:10 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/17 16:56:15 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 13:57:34 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw_char(t_game *game, char c, int x, int y)
 	int		xx;
 	int		yy;
 	t_rgba	color;
-	
+
 	c = ft_to_upper(c);
 	if (c < START_CHAR || c > END_CHAR)
 		return ;

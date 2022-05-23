@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   construct.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:03:38 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/17 16:54:52 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 14:19:32 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_u32	rgba_to_trgb(t_rgba x)
 {
 	t_u32	res;
 
-	res =  ((255 - x.a) << 24) | (x.r << 16) | (x.g << 8) | (x.b);
+	res = ((255 - x.a) << 24) | (x.r << 16) | (x.g << 8) | (x.b);
 	return (res);
 }
 

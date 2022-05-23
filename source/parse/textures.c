@@ -6,13 +6,13 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:45:13 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/18 17:23:02 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 14:22:28 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static const t_cstr	g_dirs[] = { "NO", "SO", "WE", "EA" };
+static const t_cstr	g_dirs[] = {"NO", "SO", "WE", "EA"};
 
 t_s64	parse_tex_names(t_map *map, t_cstr str)
 {

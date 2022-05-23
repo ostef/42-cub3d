@@ -6,7 +6,7 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/23 13:54:48 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 14:05:52 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define MAIN_MENU 0
 # define OPTIONS 1
 # define GAME 2
+
+# define ERR_NO_ARG "Start program with one argument: path to the map file"
 
 /* Stupid forward declarations */
 
