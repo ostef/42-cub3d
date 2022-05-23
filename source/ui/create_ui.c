@@ -6,19 +6,20 @@
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:52:20 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/20 13:17:25 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 13:56:45 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	create_ui(t_panel *panel, t_uint top, t_uint left, t_str str, void (*func) (t_game *))
+void	create_ui(t_panel *panel, t_coord coord, t_str str,
+		void (*func) (t_game *))
 {
 	t_ui	ui;
 
 	ft_memset(&ui, 0, sizeof(t_ui));
-	ui.top = top;
-	ui.left = left;
+	ui.top = coord.y;
+	ui.left = coord.x;
 	ui.width = ft_strlen(str) * WIDTH_CHAR + MARGIN * 2;
 	ui.height = HEIGHT_CHAR + MARGIN * 2;
 	ui.bg_color.r = 100;
@@ -53,85 +54,6 @@ void	click_panel(t_game *game, int x, int y)
 	}
 }
 
-void	play(t_game *game)
-{
-	mlx_mouse_hide();
-	game->state = GAME;
-	(void)game;
-}
-
-void	option(t_game *game)
-{
-	game->state = OPTIONS;
-	(void)game;
-}
-
-void	exit_click(t_game *game)
-{
-	exit(EXIT_SUCCESS);
-	(void)game;
-}
-
-void	init_main_menu(t_game *game)
-{
-	t_panel	menu;
-
-	ft_memset(&menu, 0, sizeof(t_panel));
-	game->panels[GAME] = menu;
-	game->panels[OPTIONS] = menu;
-	create_ui(&menu, (SCREEN_HEIGHT - (HEIGHT_CHAR + MARGIN * 2) * 4) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("play")) / 2 - MARGIN, "play", play);
-	create_ui(&menu, (SCREEN_HEIGHT - (HEIGHT_CHAR + MARGIN * 2)) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("options")) / 2 - MARGIN, "options", option);
-	create_ui(&menu, (SCREEN_HEIGHT + (HEIGHT_CHAR + MARGIN * 2) * 2) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("exit")) / 2 - MARGIN, "exit", exit_click);
-	game->panels[MAIN_MENU] = menu;
-}
-
-void	set_forward(t_game *game)
-{
-	game->keys.change_key = FORWARD; 
-}
-
-void	set_backward(t_game *game)
-{
-	game->keys.change_key = BACKWARD; 
-}
-
-void	set_left(t_game *game)
-{
-	game->keys.change_key = LEFT; 
-}
-
-void	set_right(t_game *game)
-{
-	game->keys.change_key = RIGHT; 
-}
-
-void	set_shoot(t_game *game)
-{
-	game->keys.change_key = SHOOT; 
-}
-
-void	back(t_game *game)
-{
-	game->keys.change_key = NO_CHANGE;
-	game->state = MAIN_MENU; 
-}
-
-void	init_option_menu(t_game *game)
-{
-	t_panel	options;
-
-	ft_memset(&options, 0, sizeof(t_panel));
-	game->panels[GAME] = options;
-	game->panels[OPTIONS] = options;
-	create_ui(&options, (SCREEN_HEIGHT - (HEIGHT_CHAR + MARGIN * 2) * 6) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("forward")) / 2 - MARGIN, "forward", set_forward);
-	create_ui(&options, (SCREEN_HEIGHT - (HEIGHT_CHAR + MARGIN * 2) * 4) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("backward")) / 2 - MARGIN, "backward", set_backward);
-	create_ui(&options, (SCREEN_HEIGHT - (HEIGHT_CHAR + MARGIN * 2) * 2) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("left")) / 2 - MARGIN, "left", set_left);
-	create_ui(&options, (SCREEN_HEIGHT + (HEIGHT_CHAR + MARGIN * 2) * 2) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("right")) / 2 - MARGIN, "right", set_right);
-	create_ui(&options, (SCREEN_HEIGHT + (HEIGHT_CHAR + MARGIN * 2) * 4) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("shoot")) / 2 - MARGIN, "shoot", set_right);
-	create_ui(&options, (SCREEN_HEIGHT + (HEIGHT_CHAR + MARGIN * 2) * 7) / 2, (SCREEN_WIDTH - WIDTH_CHAR * ft_strlen("back")) / 2 - MARGIN, "back", back);
-	game->panels[OPTIONS] = options;
-}
-
 void	create_panels(t_game *game)
 {
 	game->state = MAIN_MENU;
@@ -163,21 +85,18 @@ void	draw_panel(t_game *game)
 {
 	t_panel	panel;
 	t_uint	i;
+	t_ui	ui;
 
 	panel = game->panels[game->state];
 	i = 0;
 	while (i < panel.nb_ui)
-	{
-		draw_ui(game, panel.list_ui[i]);
-		i++;
-	}
+		draw_ui(game, panel.list_ui[i++]);
 	if (game->state == OPTIONS && game->keys.change_key != NO_CHANGE)
 	{
-		t_ui	ui;
-
 		ft_memset(&ui, 0, sizeof(t_ui));
 		ui.top = SCREEN_HEIGHT / 2;
-		ui.left = SCREEN_WIDTH / 2;
+		ui.left = SCREEN_WIDTH / 2 - ft_strlen("type a key:")
+			* WIDTH_CHAR / 2 - MARGIN;
 		ui.width = ft_strlen("type a key:") * WIDTH_CHAR + MARGIN * 2;
 		ui.height = HEIGHT_CHAR + MARGIN * 2;
 		ui.bg_color.r = 100;

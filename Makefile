@@ -5,7 +5,7 @@ SRC_DIR = source
 SRC_FILES = main.c game.c window.c input.c events.c player.c\
 	gfx/img/init.c gfx/img/operations.c\
 	gfx/draw_img.c\
-	ui/create_ui.c\
+	ui/create_ui.c ui/options_func.c ui/init_menus.c\
 	math/rgba/construct.c\
 	math/vec2f/construct.c math/vec2f/geom.c math/vec2f/operators.c\
 	parse/parse.c parse/utils.c parse/textures.c parse/colors.c parse/description.c\

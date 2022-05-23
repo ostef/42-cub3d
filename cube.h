@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: soumanso <soumanso@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:17:14 by soumanso          #+#    #+#             */
-/*   Updated: 2022/05/20 17:01:54 by soumanso         ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 13:54:48 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,15 +206,30 @@ void	clear_img(t_img *img, t_rgba col);
 void	set_px(t_img *img, int x, int y, t_rgba color);
 t_rgba	get_px(t_img *img, int x, int y);
 
+/* Inputs */
+
 int		keydown(int keycode, void *in);
 int		keyup(int keycode, void *in);
 int		mouse_press(int keycode, int x, int y, void *in);
 int		mouse_release(int keycode, int x, int y, void *in);
 int		mouse_move(int x, int y, void *in);
 
+/* Ui */
+
 void	click_panel(t_game *game, int x, int y);
+void	create_ui(t_panel *panel, t_coord coord, t_str str, 
+		void (*func) (t_game *));
 void	create_panels(t_game *game);
 void	draw_panel(t_game *game);
+
+void	init_main_menu(t_game *game);
+void	init_option_menu(t_game *game);
+
+void	set_forward(t_game *game);
+void	set_backward(t_game *game);
+void	set_left(t_game *game);
+void	set_right(t_game *game);
+void	back(t_game *game);
 
 t_bool	eprint(t_cstr fmt, ...);
 t_bool	parse_map(t_map *map, t_cstr filename);

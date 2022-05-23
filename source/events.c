@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inputs.c                                           :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljourand <ljourand@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 15:43:57 by ljourand          #+#    #+#             */
-/*   Updated: 2022/05/13 17:33:12 by ljourand         ###   ########lyon.fr   */
+/*   Updated: 2022/05/23 13:31:43 by ljourand         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	keydown(int keycode, void *game)
 {
 	t_game	*gam;
 
-	// printf("keycode: %d\n", keycode);
 	gam = (t_game *)game;
 	if (keycode == KEY_ESCAPE)
 	{
@@ -44,7 +43,6 @@ int	mouse_press(int keycode, int x, int y, void *in)
 {
 	t_game	*game;
 
-	// printf("keycode mouse: %d\n", keycode + 500);
 	game = (t_game *)in;
 	game->params.inputs[keycode + 500] = TRUE;
 	if (game->keys.change_key != NO_CHANGE)
@@ -54,8 +52,6 @@ int	mouse_press(int keycode, int x, int y, void *in)
 	}
 	click_panel(game, x, y);
 	return (0);
-	(void)x;
-	(void)y;
 }
 
 int	mouse_release(int keycode, int x, int y, void *in)
@@ -74,7 +70,6 @@ int	mouse_move(int x, int y, void *g)
 	t_game	*game;
 
 	game = (t_game *)g;
-	// printf("mouse move: x: %d, y: %d\n", x, y);
 	if (game->state != GAME)
 	{
 		game->params.mouse_coord.x = x;
@@ -86,6 +81,4 @@ int	mouse_move(int x, int y, void *g)
 		game->params.mouse_coord.y += y - SCREEN_HEIGHT / 2;
 	}
 	return (0);
-	(void)x;
-	(void)y;
 }
